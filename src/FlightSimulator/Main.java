@@ -1,4 +1,4 @@
-package FlightSimulator2018XXX_naruto_XXX;
+package FlightSimulator;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
