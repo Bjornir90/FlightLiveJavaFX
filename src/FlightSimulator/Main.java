@@ -11,7 +11,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 	    DataConnection con = new DataConnection();
-	    String request = con.makeRequest();
+	    String request = con.makeRequest("AYGA");
+	    System.out.println("Request made");
 	    System.out.println("request = " + request);
 
 	    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));

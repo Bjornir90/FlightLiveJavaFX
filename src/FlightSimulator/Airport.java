@@ -17,4 +17,8 @@ public class Airport {
 		this.departureFrom = departureFrom;
 		this.arrivalTo = arrivalTo;
 	}
+
+	public String getIcaoCode() {
+		return icaoCode;
+	}
 }

@@ -17,9 +17,13 @@ public class DataConnection {
 		client = Dsl.asyncHttpClient(clientBuilder);
 	}
 
-	public String makeRequest(){
+	public String makeRequest(Airport airport){
+		return makeRequest(airport.getIcaoCode());
+	}
+
+	public String makeRequest(String airportCode){
 		//Créer une requête de type GET
-		BoundRequestBuilder getRequest = client.prepareGet("https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?fOpQ=Air%20France");
+		BoundRequestBuilder getRequest = client.prepareGet("https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?fAir="+airportCode);
 
 		ListenableFuture<Response> future = getRequest.execute();
 		try {
