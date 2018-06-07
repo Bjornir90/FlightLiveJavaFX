@@ -1,5 +1,8 @@
 package FlightSimulator;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -75,4 +78,18 @@ public class Parser {
 		}
 		return airportNames;
 	}
+
+	public static FlightList parseResponse(String json){
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES); //Ignorer les champs inutiles
+		try {
+			FlightList flights = mapper.readValue(json, FlightList.class); //Créer l'objet de plus haut niveau dans le dictionnaire json
+			System.out.println("Mapped");
+			return flights;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

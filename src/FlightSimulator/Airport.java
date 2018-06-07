@@ -56,8 +56,5 @@ public class Airport {
 		return arrivalTo;
 	}
 
-	public String getIcaoCode() {
-		return icaoCode;
-	}
 }
 

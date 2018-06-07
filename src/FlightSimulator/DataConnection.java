@@ -28,6 +28,11 @@ public class DataConnection {
 		ListenableFuture<Response> future = getRequest.execute();
 		try {
 			Response result = future.get();
+			FlightList flights = Parser.parseResponse(result.getResponseBody());
+			for(FlightParsing f : flights.getAcList()){
+				System.out.println("f.Type = " + f.Type);
+				System.out.println("f.Icao = " + f.Icao);
+			}
 			return result.getResponseBody();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
