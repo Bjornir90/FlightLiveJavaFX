@@ -1,4 +1,4 @@
-package FlightSimulator2018XXX_naruto_XXX;
+package FlightSimulator;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

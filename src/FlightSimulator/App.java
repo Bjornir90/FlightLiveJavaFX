@@ -1,4 +1,4 @@
-package FlightSimulator2018XXX_naruto_XXX;
+package FlightSimulator;
 
 import FlightSimulator.Parser;
 
