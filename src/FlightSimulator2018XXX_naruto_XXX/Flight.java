@@ -17,5 +17,31 @@ public class Flight {
 		this.name = name;
 	}
 
+	public Airport getDepartureAirport() {
+		return departureAirport;
+	}
 
+	public Airport getArrivalAirport() {
+		return arrivalAirport;
+	}
+
+	public float[] getPosition() {
+		return position;
+	}
+
+	public float getAltitude() {
+		return altitude;
+	}
+
+	public float getSpeed() {
+		return speed;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public Plane getPlane() {
+		return plane;
+	}
 }
