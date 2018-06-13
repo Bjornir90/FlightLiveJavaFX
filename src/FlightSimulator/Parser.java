@@ -25,6 +25,8 @@ public class Parser {
 				String cityName = array[1];
 				String country = array[2];
 				String icaoId = array[3];
+				System.out.println("icaoId = " + icaoId);
+				System.out.println("airportName = " + airportName);
 				float[] position = new float[2];
 				position[0] = Float.parseFloat(array[4]);
 				position[1] = Float.parseFloat(array[5]);
@@ -79,6 +81,11 @@ public class Parser {
 		return airportNames;
 	}
 
+	/**
+	 * Take a json string and map it to a FlightList, using Jackson library.
+	 * @param json The json that contain the data to be parsed
+	 * @return The flightList created by Jackson
+	 */
 	public static FlightList parseResponse(String json){
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES); //Ignorer les champs inutiles
@@ -92,6 +99,11 @@ public class Parser {
 		return null;
 	}
 
+	/**
+	 * Turns a FlightList, which contains FlightParsing, into an ArrayList of Flight, that will be usable by the application.
+	 * @param list The original FlightList
+	 * @return The resulting list of Flight, that contains every Flight that was in the FlightList
+	 */
 	public static ArrayList<Flight> getResponseFlight(FlightList list){
 		ArrayList<Flight> result = new ArrayList<>();
 		for(FlightParsing flightParsing : list.getAcList()){

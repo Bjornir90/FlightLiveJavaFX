@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 
 public class Main extends Application {
 
@@ -14,15 +16,13 @@ public class Main extends Application {
 	    App app = new App();
 	    app.appel();
 	    DataConnection con = new DataConnection();
-	    String request = con.makeRequest("LLBG");
-	    // System.out.println("request = " + request);
-	    FlightList flights = Parser.parseResponse(request);
-	    System.out.println(Parser.getResponseFlight(flights));
+	    ArrayList<Flight> requestResult = con.makeLiaisonRequest("LFPO", "KJFK");
+	    System.out.println("requestResult = " + requestResult);
 
 
 
 	    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-	    primaryStage.setTitle("Hello World");
+	    primaryStage.setTitle("Flight Live JavaFX");
 	    primaryStage.setScene(new Scene(root, 300, 275));
 	    primaryStage.show();
     }
