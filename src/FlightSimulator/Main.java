@@ -6,17 +6,23 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+	    App app = new App();
+	    app.appel();
 	    DataConnection con = new DataConnection();
-	    String request = con.makeRequest("AYGA");
-	    System.out.println("Request made");
-	    System.out.println("request = " + request);
+	    ArrayList<Flight> requestResult = con.makeLiaisonRequest("LFPO", "KJFK");
+	    System.out.println("requestResult = " + requestResult);
+
+
 
 	    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-	    primaryStage.setTitle("Hello World");
+	    primaryStage.setTitle("Flight Live JavaFX");
 	    primaryStage.setScene(new Scene(root, 300, 275));
 	    primaryStage.show();
     }
