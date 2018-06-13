@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="asynchttpclient">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/libs/asynchttpclient" />
+      <root url="file://$PROJECT_DIR$/libs/Jackson" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/libs/asynchttpclient" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libs/Jackson" recursive="false" />
+  </library>
+</component>
