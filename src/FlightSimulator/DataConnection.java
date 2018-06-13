@@ -23,16 +23,10 @@ public class DataConnection {
 
 	public String makeRequest(String airportCode){
 		//Créer une requête de type GET
-		BoundRequestBuilder getRequest = client.prepareGet("https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?fAir="+airportCode);
-
+		BoundRequestBuilder getRequest = client.prepareGet("https://public-api.adsbexchange.com/VirtualRadar/AircraftList.json?fAirC="+airportCode);
 		ListenableFuture<Response> future = getRequest.execute();
 		try {
 			Response result = future.get();
-			FlightList flights = Parser.parseResponse(result.getResponseBody());
-			for(FlightParsing f : flights.getAcList()){
-				System.out.println("f.Type = " + f.Type);
-				System.out.println("f.Icao = " + f.Icao);
-			}
 			return result.getResponseBody();
 		} catch (InterruptedException e) {
 			e.printStackTrace();

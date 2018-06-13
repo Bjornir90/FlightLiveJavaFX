@@ -6,13 +6,20 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+	    App app = new App();
+	    app.appel();
 	    DataConnection con = new DataConnection();
-	    String request = con.makeRequest("AYGA");
-	   // System.out.println("request = " + request);
+	    String request = con.makeRequest("LLBG");
+	    // System.out.println("request = " + request);
+	    FlightList flights = Parser.parseResponse(request);
+	    System.out.println(Parser.getResponseFlight(flights));
+
+
 
 	    Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
 	    primaryStage.setTitle("Hello World");

@@ -5,10 +5,11 @@ import FlightSimulator.Parser;
 import java.util.ArrayList;
 
 public class App {
-    ArrayList<Airport> airports = new ArrayList<>();
+    public static ArrayList<Airport> airports;
 
-    public App(ArrayList<Airport> airports){
-        this.airports = airports;
+    public App(){
+
+        airports = new ArrayList<>();
     }
 
     public void appel(){

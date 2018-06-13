@@ -92,4 +92,24 @@ public class Parser {
 		return null;
 	}
 
+	public static ArrayList<Flight> getResponseFlight(FlightList list){
+		ArrayList<Flight> result = new ArrayList<>();
+		for(FlightParsing flightParsing : list.getAcList()){
+			Airport from = null, to = null;
+			for(Airport airport : App.airports){
+				if(airport.getIcaoCode().equals(flightParsing.From.substring(0, 4))){
+					from = airport;
+				} else if (airport.getIcaoCode().equals(flightParsing.To.substring(0, 4))){
+					to = airport;
+				}
+			}
+			float[] position = new float[2];
+			position[0] = flightParsing.Long;
+			position[1] = flightParsing.Lat;
+			Flight flight = new Flight(from, to, position, flightParsing.Alt, flightParsing.Spd, flightParsing.Icao);
+			result.add(flight);
+		}
+		return result;
+	}
+
 }

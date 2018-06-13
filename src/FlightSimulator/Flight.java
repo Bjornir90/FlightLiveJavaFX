@@ -25,6 +25,19 @@ public class Flight {
 		return arrivalAirport;
 	}
 
+	@Override
+	public String toString() {
+		return "Flight{" +
+				"departureAirport=" + departureAirport +
+				", arrivalAirport=" + arrivalAirport +
+				", position=" + position +
+				", altitude=" + altitude +
+				", speed=" + speed +
+				", name='" + name + '\'' +
+				", plane=" + plane +
+				'}';
+	}
+
 	public float[] getPosition() {
 		return position;
 	}
