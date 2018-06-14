@@ -1,4 +1,4 @@
-package FlightSimulator;
+package FlightSimulator.data;
 
 public class Flight {
 	private Airport departureAirport, arrivalAirport;

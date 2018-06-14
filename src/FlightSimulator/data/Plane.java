@@ -1,4 +1,4 @@
-package FlightSimulator;
+package FlightSimulator.data;
 
 public class Plane {
 	private boolean isMilitary;

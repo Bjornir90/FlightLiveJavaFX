@@ -1,4 +1,4 @@
-package FlightSimulator;
+package FlightSimulator.data;
 
 import java.util.ArrayList;
 

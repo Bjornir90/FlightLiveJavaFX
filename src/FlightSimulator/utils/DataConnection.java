@@ -1,8 +1,9 @@
-package FlightSimulator;
+package FlightSimulator.utils;
 
+import FlightSimulator.data.Airport;
+import FlightSimulator.data.Flight;
 import org.asynchttpclient.*;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;

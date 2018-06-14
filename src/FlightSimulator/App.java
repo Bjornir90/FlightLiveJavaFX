@@ -1,6 +1,7 @@
 package FlightSimulator;
 
-import FlightSimulator.Parser;
+import FlightSimulator.data.Airport;
+import FlightSimulator.utils.Parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;

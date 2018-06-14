@@ -1,4 +1,4 @@
-package FlightSimulator;
+package FlightSimulator.utils;
 
 public class FlightParsing {
 	public int Id;

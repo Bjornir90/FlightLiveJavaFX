@@ -1,5 +1,9 @@
-package FlightSimulator;
+package FlightSimulator.utils;
 
+import FlightSimulator.data.Airport;
+import FlightSimulator.data.Flight;
+import FlightSimulator.utils.FlightList;
+import FlightSimulator.utils.FlightParsing;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
