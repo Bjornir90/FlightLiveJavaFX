@@ -14,10 +14,10 @@ public class App {
 
     public void appel(){
         Parser.parse(airports);
-        String country = airports.get(1).getCountry();
+        String country = airports.get(10).getCountry();
         ArrayList<String> cities=Parser.getCitiesOfCountry(airports, country);
         for (String i : cities){
-            System.out.println(i);
+            System.out.println("City name : "+i);
         }
     }
 }

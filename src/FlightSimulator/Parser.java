@@ -25,8 +25,6 @@ public class Parser {
 				String cityName = array[1];
 				String country = array[2];
 				String icaoId = array[3];
-				System.out.println("icaoId = " + icaoId);
-				System.out.println("airportName = " + airportName);
 				float[] position = new float[2];
 				position[0] = Float.parseFloat(array[4]);
 				position[1] = Float.parseFloat(array[5]);
@@ -91,7 +89,6 @@ public class Parser {
 		mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES); //Ignorer les champs inutiles
 		try {
 			FlightList flights = mapper.readValue(json, FlightList.class); //Créer l'objet de plus haut niveau dans le dictionnaire json
-			System.out.println("Mapped");
 			return flights;
 		} catch (IOException e) {
 			e.printStackTrace();
