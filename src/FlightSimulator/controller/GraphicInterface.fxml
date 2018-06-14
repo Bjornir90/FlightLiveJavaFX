@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FlightSimulator.controller.LoadingController">
    <children>
       <TabPane prefHeight="400.0" prefWidth="238.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -55,8 +55,8 @@
                                              <children>
                                                 <Label text="Pays" />
                                                 <Label text="Ville" GridPane.rowIndex="1" />
-                                                <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" />
-                                                <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <ChoiceBox fx:id="countryDropBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                                                <ChoiceBox fx:id="cityDropBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                              </children>
                                              <padding>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -79,8 +79,8 @@
                                              <children>
                                                 <Label text="Départ" />
                                                 <Label text="Arrivée" GridPane.rowIndex="1" />
-                                                <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" />
-                                                <ChoiceBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <ChoiceBox fx:id="departureDropBox" prefWidth="150.0" GridPane.columnIndex="1" />
+                                                <ChoiceBox fx:id="arrivalDropBox" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                              </children>
                                              <padding>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -120,15 +120,15 @@
                                              </GridPane.margin>
                                           </Label>
                                           <Label text="px" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="sizeField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
                                  </children>
                               </Pane>
                               <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button mnemonicParsing="false" text="Paramètres affichage" />
-                                    <Button mnemonicParsing="false" text="Valider">
+                                    <Button fx:id="settingsButton" mnemonicParsing="false" text="Paramètres affichage" />
+                                    <Button fx:id="validateButton" mnemonicParsing="false" text="Valider">
                                        <HBox.margin>
                                           <Insets left="10.0" right="2.0" />
                                        </HBox.margin>
@@ -158,7 +158,7 @@
                                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <ListView prefHeight="200.0" prefWidth="185.0" />
+                              <ListView fx:id="flightsList" prefHeight="200.0" prefWidth="185.0" />
                            </children>
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

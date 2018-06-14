@@ -6,8 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-
 
 public class Main extends Application {
 
@@ -20,9 +18,9 @@ public class Main extends Application {
 
 
 
-	    Parent root = FXMLLoader.load(getClass().getResource("GraphicInterface.fxml"));
+	    Parent root = FXMLLoader.load(getClass().getResource("controller/GraphicInterface.fxml"));
 	    primaryStage.setTitle("Flight Live JavaFX");
-	    primaryStage.setScene(new Scene(root, 700, 400));
+	    primaryStage.setScene(new Scene(root));
 	    primaryStage.show();
     }
 
