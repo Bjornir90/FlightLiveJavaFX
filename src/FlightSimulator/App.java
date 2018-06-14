@@ -3,21 +3,30 @@ package FlightSimulator;
 import FlightSimulator.Parser;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class App {
-    public static ArrayList<Airport> airports;
+    private HashMap<String, Airport> airports;
+    private ArrayList<String> countries, cities;
 
     public App(){
 
-        airports = new ArrayList<>();
+        countries = new ArrayList<>();
+        cities = new ArrayList<>();
+
+        airports = Parser.parse();
+        for(Airport airport : airports.values()){
+        	String country = airport.getCountry();
+        	String city = airport.getCity();
+        	if (!countries.contains(country)){
+        		countries.add(country);
+	        }
+	        if(!cities.contains(city)){
+        		cities.add(city);
+	        }
+        }
+
+
     }
 
-    public void appel(){
-        Parser.parse(airports);
-        String country = airports.get(10).getCountry();
-        ArrayList<String> cities=Parser.getCitiesOfCountry(airports, country);
-        for (String i : cities){
-            System.out.println("City name : "+i);
-        }
-    }
 }

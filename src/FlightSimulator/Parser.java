@@ -7,12 +7,13 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Parser {
 
-	public static void parse(ArrayList<Airport> airports) {
+	public static HashMap<String, Airport> parse() {
+		HashMap<String, Airport> airports = new HashMap<>();
 		try
-
 		{
 			FileReader file = new FileReader("airports.csv");
 			BufferedReader bufRead = new BufferedReader(file);
@@ -32,18 +33,20 @@ public class Parser {
 				line = bufRead.readLine();
 
 				Airport airport = new Airport(cityName,country,airportName,icaoId,position);
-				airports.add(airport);
+				airports.put(icaoId, airport);
 			}
 
 			bufRead.close();
 			file.close();
 
-		} catch (
-				IOException e)
+		} catch (IOException e)
 
 		{
+			System.err.println("Fatal error : could not read airports.csv");
 			e.printStackTrace();
+			System.exit(1);
 		}
+		return airports;
 	}
 
 	/**
@@ -101,17 +104,12 @@ public class Parser {
 	 * @param list The original FlightList
 	 * @return The resulting list of Flight, that contains every Flight that was in the FlightList
 	 */
-	public static ArrayList<Flight> getResponseFlight(FlightList list){
+	public static ArrayList<Flight> getResponseFlight(FlightList list, HashMap<String, Airport> airports){
 		ArrayList<Flight> result = new ArrayList<>();
 		for(FlightParsing flightParsing : list.getAcList()){
-			Airport from = null, to = null;
-			for(Airport airport : App.airports){
-				if(airport.getIcaoCode().equals(flightParsing.From.substring(0, 4))){
-					from = airport;
-				} else if (airport.getIcaoCode().equals(flightParsing.To.substring(0, 4))){
-					to = airport;
-				}
-			}
+			Airport from, to;
+			from = airports.get(flightParsing.From.substring(0, 4));
+			to = airports.get(flightParsing.To.substring(0, 4));
 			float[] position = new float[2];
 			position[0] = flightParsing.Long;
 			position[1] = flightParsing.Lat;

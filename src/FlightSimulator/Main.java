@@ -14,10 +14,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 	    App app = new App();
-	    app.appel();
-	    DataConnection con = new DataConnection();
+	    /*DataConnection con = new DataConnection();
 	    ArrayList<Flight> requestResult = con.makeLiaisonRequest("LFPO", "KJFK");
-	    System.out.println("requestResult = " + requestResult);
+	    System.out.println("requestResult = " + requestResult);*/
 
 
 

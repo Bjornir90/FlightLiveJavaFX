@@ -4,6 +4,7 @@ import org.asynchttpclient.*;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 public class DataConnection {
@@ -38,25 +39,18 @@ public class DataConnection {
 		return null;
 	}
 
-	public ArrayList<Flight> makeLiaisonRequest(String airportCode1, String airportCode2){
-		if(airportCode1.equals(airportCode2)){
-			System.err.println("The airports code can't be the same");
+
+	public ArrayList<Flight> makeLiaisonRequest(Airport airport1, Airport airport2, HashMap<String, Airport> airports){
+		if(airport1.equals(airport2)){
+			System.err.println("The airports can't be the same");
 			return null;
 		}
-		String result1 = makeRequest(airportCode1);
-		String result2 = makeRequest(airportCode2);
+		String result1 = makeRequest(airport1);
+		String result2 = makeRequest(airport2);
 		FlightList flightList1 = Parser.parseResponse(result1);
 		FlightList flightList2 = Parser.parseResponse(result2);
-		ArrayList<Flight> list1 = Parser.getResponseFlight(flightList1);
-		ArrayList<Flight> list2 = Parser.getResponseFlight(flightList2);
-		Airport airport1 = null, airport2 = null;
-		for(Airport a : App.airports){
-			if(a.getIcaoCode().equals(airportCode1)){
-				airport1 = a;
-			} else if (a.getIcaoCode().equals(airportCode2)){
-				airport2 = a;
-			}
-		}
+		ArrayList<Flight> list1 = Parser.getResponseFlight(flightList1, airports);
+		ArrayList<Flight> list2 = Parser.getResponseFlight(flightList2, airports);
 		ArrayList<Flight> liaisonList = new ArrayList<>();
 		for(Flight f : list1){
 			if(f.getArrivalAirport() == airport1 && f.getDepartureAirport() == airport2 || f.getArrivalAirport() == airport2 && f.getDepartureAirport() == airport1){
