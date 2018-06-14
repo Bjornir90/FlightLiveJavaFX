@@ -1,6 +1,8 @@
 package FlightSimulator;
 
+import FlightSimulator.controller.LoadingController;
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -17,8 +19,11 @@ public class Main extends Application {
 	    System.out.println("requestResult = " + requestResult);*/
 
 
-
-	    Parent root = FXMLLoader.load(getClass().getResource("controller/GraphicInterface.fxml"));
+	    FXMLLoader loader = new FXMLLoader(getClass().getResource("controller/GraphicInterface.fxml"));
+	    Parent root = loader.load();
+	    LoadingController controller = loader.getController();
+	    controller.setApp(app);
+	    controller.initialize();
 	    primaryStage.setTitle("Flight Live JavaFX");
 	    primaryStage.setScene(new Scene(root));
 	    primaryStage.show();

@@ -30,4 +30,15 @@ public class App {
 
     }
 
+	public HashMap<String, Airport> getAirports() {
+		return airports;
+	}
+
+	public ArrayList<String> getCountries() {
+		return countries;
+	}
+
+	public ArrayList<String> getCities() {
+		return cities;
+	}
 }
