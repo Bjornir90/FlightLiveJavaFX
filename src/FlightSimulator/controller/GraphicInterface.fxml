@@ -78,7 +78,7 @@
                                                 </GridPane>
                                                 <Label text="Arrivée">
                                                    <VBox.margin>
-                                                      <Insets top="10.0" />
+                                                      <Insets left="5.0" top="10.0" />
                                                    </VBox.margin>
                                                     <font>
                                                         <Font name="System Italic" size="12.0" />
