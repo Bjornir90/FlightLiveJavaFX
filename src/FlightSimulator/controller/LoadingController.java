@@ -53,7 +53,7 @@ public class LoadingController {
 			countryDropBox.setItems(observableListCountry);
 		}
 
-		InterfaceController interfaceController = new InterfaceController(departureCountry, arrivalCountry, departureCity, arrivalCity, departureAirport, arrivalAirport, size, validateButton, settingsButton, flightsList);
+		InterfaceController interfaceController = new InterfaceController(departureCountry, arrivalCountry, departureCity, arrivalCity, departureAirport, arrivalAirport, sizeField, validateButton, settingsButton, flightsList);
 
 	}
 
