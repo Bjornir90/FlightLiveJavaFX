@@ -17,6 +17,7 @@ public class InterfaceController {
 	private MyListView<String> flightList;
 
 	public InterfaceController(ChoiceBox<String> departureCountry, ChoiceBox<String> arrivalCountry, ChoiceBox<String> departureCity, ChoiceBox<String> arrivalCity, ChoiceBox<String> departureAirport, ChoiceBox<String> arrivalAirport, TextField size, Button validate, Button settings, ListView<String> list){
+		choiceBoxes = new HashMap<>();
 		choiceBoxes.put("departureCountry", new MyChoiceBox<>(departureCountry));
 		choiceBoxes.put("arrivalCountry", new MyChoiceBox<>(arrivalCountry));
 		choiceBoxes.put("departureCity", new MyChoiceBox<>(departureCity));

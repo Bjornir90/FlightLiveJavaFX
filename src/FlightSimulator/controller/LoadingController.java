@@ -13,13 +13,17 @@ public class LoadingController {
 	private App app;
 
 	@FXML
-	ChoiceBox<String> countryDropBox;
+	ChoiceBox<String> departureCountry;
 	@FXML
-	ChoiceBox<String> cityDropBox;
+	ChoiceBox<String> departureCity;
 	@FXML
-	ChoiceBox<String> departureDropBox;
+	ChoiceBox<String> arrivalCountry;
 	@FXML
-	ChoiceBox<String> arrivalDropBox;
+	ChoiceBox<String> arrivalCity;
+	@FXML
+	ChoiceBox<String> departureAirport;
+	@FXML
+	ChoiceBox<String> arrivalAirport;
 	@FXML
 	Button validateButton;
 	@FXML
@@ -31,18 +35,32 @@ public class LoadingController {
 
 	@FXML
 	public void initialize() {
-		cityDropBox.setDisable(true);
-		departureDropBox.setDisable(true);
-		arrivalDropBox.setDisable(true);
-		countryDropBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+		arrivalCity.setDisable(true);
+		departureCity.setDisable(true);
+		departureAirport.setDisable(true);
+		arrivalAirport.setDisable(true);
+		departureCountry.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			if(newValue != null){
-				cityDropBox.setDisable(false);
-				cityDropBox.setItems(FXCollections.observableArrayList(app.getCountries().get(newValue)));
+				departureCity.setDisable(false);
+				departureCity.setItems(FXCollections.observableArrayList(app.getCountries().get(newValue)));
 			} else {
-				cityDropBox.setDisable(true);
+				departureCity.setDisable(true);
 			}
 		});
-		cityDropBox.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+		departureCity.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+			if(newValue != null){
+
+			}
+		}));
+		arrivalCountry.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue != null){
+				arrivalCity.setDisable(false);
+				arrivalCity.setItems(FXCollections.observableArrayList(app.getCountries().get(newValue)));
+			} else {
+				arrivalCity.setDisable(true);
+			}
+		});
+		arrivalCity.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
 			if(newValue != null){
 
 			}
@@ -50,7 +68,8 @@ public class LoadingController {
 		//TODO : Give each controller the data Collection it needs.
 		if(app != null) {
 			ObservableList<String> observableListCountry = FXCollections.observableArrayList(app.getCountries().keySet());
-			countryDropBox.setItems(observableListCountry);
+			departureCountry.setItems(observableListCountry);
+			arrivalCountry.setItems(observableListCountry);
 		}
 
 		InterfaceController interfaceController = new InterfaceController(departureCountry, arrivalCountry, departureCity, arrivalCity, departureAirport, arrivalAirport, sizeField, validateButton, settingsButton, flightsList);
