@@ -34,11 +34,27 @@ public class LoadingController {
 		cityDropBox.setDisable(true);
 		departureDropBox.setDisable(true);
 		arrivalDropBox.setDisable(true);
+		countryDropBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+			if(newValue != null){
+				cityDropBox.setDisable(false);
+				cityDropBox.setItems(FXCollections.observableArrayList(app.getCountries().get(newValue)));
+			} else {
+				cityDropBox.setDisable(true);
+			}
+		});
+		cityDropBox.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+			if(newValue != null){
+
+			}
+		}));
 		//TODO : Give each controller the data Collection it needs.
 		if(app != null) {
-			ObservableList<String> observableListCountry = FXCollections.observableArrayList(app.getCountries());
+			ObservableList<String> observableListCountry = FXCollections.observableArrayList(app.getCountries().keySet());
 			countryDropBox.setItems(observableListCountry);
 		}
+
+		InterfaceController interfaceController = new InterfaceController(departureCountry, arrivalCountry, departureCity, arrivalCity, departureAirport, arrivalAirport, size, validateButton, settingsButton, flightsList);
+
 	}
 
 	public void setApp(App app) {
