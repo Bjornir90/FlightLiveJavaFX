@@ -4,29 +4,32 @@ import FlightSimulator.data.Airport;
 import FlightSimulator.utils.Parser;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class App {
     private HashMap<String, Airport> airports;
-    private ArrayList<String> countries, cities;
+    private HashMap<String, ArrayList<String>> countries;
 
     public App(){
 
-        countries = new ArrayList<>();
-        cities = new ArrayList<>();
+        countries = new HashMap<>();
 
         airports = Parser.parse();
         for(Airport airport : airports.values()){
         	String country = airport.getCountry();
         	String city = airport.getCity();
-        	if (!countries.contains(country)){
-        		countries.add(country);
+        	if (!countries.containsKey(country)){
+        		countries.put(country, new ArrayList<String>());
 	        }
-	        if(!cities.contains(city)){
-        		cities.add(city);
+	        if(!countries.get(country).contains(city)){
+        		countries.get(country).add(city);
 	        }
         }
 
+        for(Airport airport : airports.values()){
+        	Collections.sort(countries.get(airport.getCountry()));
+        }
 
     }
 
@@ -34,11 +37,8 @@ public class App {
 		return airports;
 	}
 
-	public ArrayList<String> getCountries() {
+	public HashMap<String, ArrayList<String>> getCountries() {
 		return countries;
 	}
 
-	public ArrayList<String> getCities() {
-		return cities;
-	}
 }
