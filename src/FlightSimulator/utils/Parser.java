@@ -37,7 +37,7 @@ public class Parser {
 				line = bufRead.readLine();
 
 				Airport airport = new Airport(cityName,country,airportName,icaoId,position);
-				airports.put(icaoId, airport);
+				airports.put(airportName, airport);
 			}
 
 			bufRead.close();

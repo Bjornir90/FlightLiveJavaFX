@@ -26,7 +26,9 @@ public class DataModel {
 	}
 
 	private void notifyControllers(){
-
+		for(Controller controller : subscribers){
+			controller.notifyControllerOfNewData(flights);
+		}
 	}
 
 	public void subscribe(Controller controller){
