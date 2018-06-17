@@ -46,6 +46,10 @@ public class DataConnection {
 			System.err.println("The airports can't be the same");
 			return null;
 		}
+		if(airport1 == null || airport2 == null){
+			System.err.println("Airports can't be null");
+			return null;
+		}
 		String result1 = makeRequest(airport1);
 		String result2 = makeRequest(airport2);
 		FlightList flightList1 = Parser.parseResponse(result1);
@@ -54,12 +58,12 @@ public class DataConnection {
 		ArrayList<Flight> list2 = Parser.getResponseFlight(flightList2, airports);
 		ArrayList<Flight> liaisonList = new ArrayList<>();
 		for(Flight f : list1){
-			if(f.getArrivalAirport() == airport1 && f.getDepartureAirport() == airport2 || f.getArrivalAirport() == airport2 && f.getDepartureAirport() == airport1){
+			if(f.getArrivalAirport().equals(airport2) && f.getDepartureAirport().equals(airport1)){
 				liaisonList.add(f);
 			}
 		}
 		for(Flight f : list2){
-			if(f.getArrivalAirport() == airport1 && f.getDepartureAirport() == airport2 || f.getArrivalAirport() == airport2 && f.getDepartureAirport() == airport1){
+			if(f.getArrivalAirport().equals(airport2) && f.getDepartureAirport().equals(airport1)){
 				liaisonList.add(f);
 			}
 		}

@@ -1,5 +1,7 @@
 package FlightSimulator.data;
 
+import javafx.scene.control.Alert;
+
 public class Flight {
 	private Airport departureAirport, arrivalAirport;
 	private float[] position;

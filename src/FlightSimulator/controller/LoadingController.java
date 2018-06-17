@@ -8,10 +8,7 @@ import FlightSimulator.utils.DataConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -126,7 +123,16 @@ public class LoadingController {
 			validateButton.setOnMouseClicked(event -> {
 				String departure = departureAirport.getSelectionModel().getSelectedItem(), arrival = arrivalAirport.getSelectionModel().getSelectedItem();
 				if(departure != null && arrival != null){
-					ArrayList<Flight> flights = dataConnection.makeLiaisonRequest(app.getAirports().get(departure), app.getAirports().get(arrival), app.getAirports());
+					ArrayList<Flight> flights = dataConnection.makeLiaisonRequest(app.getAirports().get(app.getAirportNameToID().get(departure)), app.getAirports().get(app.getAirportNameToID().get(arrival)), app.getAirports());
+					System.out.println("flights = " + flights);
+					if(flights.isEmpty()){
+						Alert alert = new Alert(Alert.AlertType.INFORMATION);
+						alert.setContentText("No flights have been found.");
+						alert.setHeaderText("Empty data");
+						alert.setTitle("No flights");
+						alert.show();
+						return;
+					}
 					dataModel.notifyNewFlightList(flights);
 				}
 			});

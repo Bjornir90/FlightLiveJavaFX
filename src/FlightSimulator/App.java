@@ -10,12 +10,14 @@ import java.util.HashMap;
 public class App {
     private HashMap<String, Airport> airports;
     private HashMap<String, ArrayList<String>> countries;
+    private HashMap<String, String> airportNameToID;
 
     public App(){
 
         countries = new HashMap<>();
+        airportNameToID = new HashMap<>();
 
-        airports = Parser.parse();
+        airports = Parser.parse(airportNameToID);
         for(Airport airport : airports.values()){
         	String country = airport.getCountry();
         	String city = airport.getCity();
@@ -41,4 +43,7 @@ public class App {
 		return countries;
 	}
 
+	public HashMap<String, String> getAirportNameToID() {
+		return airportNameToID;
+	}
 }

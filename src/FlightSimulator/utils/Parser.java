@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class Parser {
 
-	public static HashMap<String, Airport> parse() {
+	public static HashMap<String, Airport> parse(HashMap<String, String> nameToID) {
 		HashMap<String, Airport> airports = new HashMap<>();
 		try
 		{
@@ -37,7 +37,8 @@ public class Parser {
 				line = bufRead.readLine();
 
 				Airport airport = new Airport(cityName,country,airportName,icaoId,position);
-				airports.put(airportName, airport);
+				airports.put(icaoId, airport);
+				nameToID.put(airportName, icaoId);
 			}
 
 			bufRead.close();
@@ -112,6 +113,7 @@ public class Parser {
 		ArrayList<Flight> result = new ArrayList<>();
 		for(FlightParsing flightParsing : list.getAcList()){
 			Airport from, to;
+			System.out.println("flightParsing = " + flightParsing.From);
 			from = airports.get(flightParsing.From.substring(0, 4));
 			to = airports.get(flightParsing.To.substring(0, 4));
 			float[] position = new float[2];
