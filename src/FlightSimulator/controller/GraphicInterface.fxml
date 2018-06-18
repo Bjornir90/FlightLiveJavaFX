@@ -234,7 +234,7 @@
                 </Tab>
               </tabs>
             </TabPane>
-            <Pane prefHeight="340.0" prefWidth="585.0">
+            <Pane prefHeight="340.0" prefWidth="585.0" fx:id="pane3D" >
                <children>
                   <Separator layoutX="-3.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="3.0" />
                </children>

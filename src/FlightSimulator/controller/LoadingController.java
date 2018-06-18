@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 
 public class LoadingController {
 	private App app;
@@ -32,6 +33,8 @@ public class LoadingController {
 	TextField sizeField;
 	@FXML
 	ListView<String> flightsList;
+	@FXML
+	Pane pane3D;
 
 	@FXML
 	public void initialize() {
@@ -74,6 +77,7 @@ public class LoadingController {
 
 		InterfaceController interfaceController = new InterfaceController(departureCountry, arrivalCountry, departureCity, arrivalCity, departureAirport, arrivalAirport, sizeField, validateButton, settingsButton, flightsList);
 
+		PlanetController planetController = new PlanetController(pane3D);
 	}
 
 	public void setApp(App app) {
