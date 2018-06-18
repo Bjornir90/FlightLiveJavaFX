@@ -16,7 +16,7 @@ public abstract class Controller {
 		subscribers = new ArrayList<>();
 	}
 
-	public abstract void notifyControllerOfNewData(ArrayList<Flight> flights);
+	public abstract void notifyControllerOfNewData(Object o);
 	public abstract void notifyControllerOfNewSettings();
 
 

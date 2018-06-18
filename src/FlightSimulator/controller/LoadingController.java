@@ -110,6 +110,7 @@ public class LoadingController {
 				}
 			}
 		}));
+
 		if(app != null) {
 			ObservableList<String> observableListCountry = FXCollections.observableArrayList(app.getCountries().keySet());
 			Collections.sort(observableListCountry);
@@ -134,6 +135,12 @@ public class LoadingController {
 						return;
 					}
 					dataModel.notifyNewFlightList(flights);
+				}
+			});
+
+			flightsList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+				if(newValue != null){
+					dataModel.notifyNewSelectedFlight(newValue);
 				}
 			});
 

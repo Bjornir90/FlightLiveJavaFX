@@ -12,6 +12,7 @@ public class DataModel {
 	private HashMap<String, ArrayList<String>> countries;
 	private ArrayList<Flight> flights;
 	private ArrayList<Controller> subscribers;
+	private Flight selectedFlight;
 
 
 	public DataModel(HashMap<String, Airport> airports, HashMap<String, ArrayList<String>> countries) {
@@ -22,12 +23,21 @@ public class DataModel {
 
 	public void notifyNewFlightList(ArrayList<Flight> flights){
 		this.flights = flights;
-		notifyControllers();
+		notifyControllers(flights);
 	}
 
-	private void notifyControllers(){
+	private void notifyControllers(Object o){
 		for(Controller controller : subscribers){
-			controller.notifyControllerOfNewData(flights);
+			controller.notifyControllerOfNewData(o);
+		}
+	}
+
+	public void notifyNewSelectedFlight(String flightName){
+		for(Flight flight : flights){
+			if(flight.getName().equals(flightName)){
+				selectedFlight = flight;
+				notifyControllers(flight);
+			}
 		}
 	}
 

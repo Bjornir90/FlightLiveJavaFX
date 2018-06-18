@@ -25,7 +25,7 @@ public class MyListView extends MyView{
 			ArrayList<Flight> flights = (ArrayList<Flight>) o;
 			ArrayList<String> flightsData = new ArrayList<>();
 			for(Flight f : flights){
-				flightsData.add(f.getName() + " Destination : " + f.getArrivalAirport());
+				flightsData.add(f.getName());
 			}
 			ObservableList<String> list = FXCollections.observableList(flightsData);
 			element.setItems(list);

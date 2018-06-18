@@ -40,8 +40,8 @@ public class InterfaceController extends Controller{
 	}
 
 	@Override
-	public void notifyControllerOfNewData(ArrayList<Flight> flights) {
-		subscribers.forEach(view -> view.notifyViewOfNewData(flights));
+	public void notifyControllerOfNewData(Object o) {
+		subscribers.forEach(view -> view.notifyViewOfNewData(o));
 	}
 
 	@Override
