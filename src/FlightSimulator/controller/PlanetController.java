@@ -17,7 +17,7 @@ import javafx.scene.transform.Translate;
 
 import java.net.URL;
 
-public class PlanetController {
+public class PlanetController extends Controller{
     private AnchorPane pane;
     private Pane sub;
     private static final double TEXTURE_LAT_OFFSET = -0.2f;
@@ -115,5 +115,13 @@ public class PlanetController {
     }
 
 
+    @Override
+    public void notifyControllerOfNewData(Object o, int dataType) {
+        //TODO use this method for new data
+    }
 
+    @Override
+    public void notifyControllerOfNewSettings(Object data, int dataType) {
+
+    }
 }

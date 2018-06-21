@@ -4,15 +4,22 @@ import FlightSimulator.App;
 import FlightSimulator.data.Airport;
 import FlightSimulator.data.Flight;
 import FlightSimulator.model.DataModel;
+import FlightSimulator.model.SettingsModel;
 import FlightSimulator.utils.DataConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -78,6 +85,7 @@ public class LoadingController {
 	public void onAppLoaded(){
 		PlanetController planetController = new PlanetController(root,pane3D);
 		Group parent = planetController.displayEarth();
+		SettingsModel settingsModel = new SettingsModel();
 		departureCountry.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			if(newValue != null){
 				departureCity.setDisable(false);
@@ -223,7 +231,6 @@ public class LoadingController {
 				String departure = departureAirport.getSelectionModel().getSelectedItem(), arrival = arrivalAirport.getSelectionModel().getSelectedItem();
 				if(departure != null && arrival != null){
 					ArrayList<Flight> flights = dataConnection.makeLiaisonRequest(app.getAirports().get(app.getAirportNameToID().get(departure)), app.getAirports().get(app.getAirportNameToID().get(arrival)), app.getAirports());
-					//System.out.println("flights = " + flights);
 					if(flights.isEmpty()){
 						Alert alert = new Alert(Alert.AlertType.INFORMATION);
 						alert.setContentText("No flights have been found.");
@@ -236,6 +243,26 @@ public class LoadingController {
 				}
 			});
 
+		settingsButton.setOnMouseClicked(event -> {
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("SettingsPopup.fxml"));
+				Parent root = loader.load();
+				PopupController popupController = loader.getController();
+				popupController.setModel(settingsModel);
+				settingsModel.subscribe(popupController);
+				Scene scene = new Scene(root);
+				Stage stage = new Stage();
+				stage.setScene(scene);
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.setTitle("Settings");
+				stage.show();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.err.println("Error, could not load pop-up interface !");
+				System.exit(1);
+			}
+		});
+
 			flightsList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 				if(newValue != null){
 					dataModel.notifyNewSelectedFlight(newValue);
@@ -244,6 +271,7 @@ public class LoadingController {
 
 			interfaceController.setDataModel(dataModel);
 			dataModel.subscribe(interfaceController);
+			planetController.setSettingsModel(settingsModel);
 
 			/*PlanetController planetController = new PlanetController(root,pane3D);
 			Group parent = planetController.displayEarth();*/
