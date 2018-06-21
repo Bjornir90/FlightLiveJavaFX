@@ -35,12 +35,6 @@ public class Parser {
 				position[1] = Float.parseFloat(array[5]);
 
 				line = bufRead.readLine();
-				if(icaoId.equals("SPJC")){
-					System.out.println("Found missing airport : "+airportName);
-				}
-				if(cityName.equals("Lima")){
-					System.out.println("\n\n\n\nFound Lima airport : "+airportName+" Code : "+icaoId+"\n\n\n\n\n");
-				}
 				Airport airport = new Airport(cityName,country,airportName,icaoId,position);
 				airports.put(icaoId, airport);
 				nameToID.put(airportName, icaoId);
@@ -121,16 +115,17 @@ public class Parser {
 			from = airports.get(flightParsing.From.substring(0, 4));
 			to = airports.get(flightParsing.To.substring(0, 4));
 			if(from == null){
-				System.err.println("Error : missing airport : "+flightParsing.From);
+				System.err.println("Exception : missing airport : "+flightParsing.From);
+				continue;
 			}
 			if(to == null){
-				System.err.println("Error : missing airport : "+flightParsing.To);
-				System.exit(1);
+				System.err.println("Exception : missing airport : "+flightParsing.To);
+				continue;
 			}
 			float[] position = new float[2];
 			position[0] = flightParsing.Long;
 			position[1] = flightParsing.Lat;
-			Flight flight = new Flight(from, to, position, flightParsing.Alt, flightParsing.Spd, flightParsing.Icao);
+			Flight flight = new Flight(from, to, position, flightParsing.Alt, flightParsing.Spd, flightParsing.Icao, flightParsing.Id, flightParsing.Mil, flightParsing.Type, flightParsing.Icao);
 			result.add(flight);
 		}
 		return result;
