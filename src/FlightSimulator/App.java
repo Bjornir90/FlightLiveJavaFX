@@ -22,7 +22,8 @@ public class App {
         	String country = airport.getCountry();
         	String city = airport.getCity();
         	if (!countries.containsKey(country)){
-        		countries.put(country, new ArrayList<String>());
+        		countries.put(country, new ArrayList<>());
+		        System.out.println("country = " + country);
 	        }
 	        if(!countries.get(country).contains(city)){
         		countries.get(country).add(city);

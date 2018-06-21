@@ -68,16 +68,16 @@ public class LoadingController {
 		dataConnection = new DataConnection();
 		departureTowns = new ArrayList<>();
 		arrivalTowns = new ArrayList<>();
-		PlanetController planetController = new PlanetController(root,pane3D);
-		Group parent = planetController.displayEarth();
-		//TODO move to another method
 		arrivalCity.setDisable(true);
 		departureCity.setDisable(true);
 		departureAirport.setDisable(true);
 		arrivalAirport.setDisable(true);
 		validateButton.setDisable(true);
+	}
 
-
+	public void onAppLoaded(){
+		PlanetController planetController = new PlanetController(root,pane3D);
+		Group parent = planetController.displayEarth();
 		departureCountry.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			if(newValue != null){
 				departureCity.setDisable(false);
@@ -235,7 +235,7 @@ public class LoadingController {
 						return;
 					}
 					dataModel.notifyNewFlightList(flights);
-					}
+				}
 			});
 
 			flightsList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -251,11 +251,10 @@ public class LoadingController {
 			Group parent = planetController.displayEarth();*/
 			//planetController.displayTown(parent, departureAirport.getSelectionModel().getSelectedItem(),);
 		}
-
-
 	}
 
 	public void setApp(App app) {
 		this.app = app;
+		onAppLoaded();
 	}
 }
