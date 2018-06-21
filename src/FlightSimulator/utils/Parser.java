@@ -125,7 +125,7 @@ public class Parser {
 			float[] position = new float[2];
 			position[0] = flightParsing.Long;
 			position[1] = flightParsing.Lat;
-			Flight flight = new Flight(from, to, position, flightParsing.Alt, flightParsing.Spd, flightParsing.Icao);
+			Flight flight = new Flight(from, to, position, flightParsing.Alt, flightParsing.Spd, flightParsing.Icao, flightParsing.Id, flightParsing.Mil, flightParsing.Type, flightParsing.Icao);
 			result.add(flight);
 		}
 		return result;

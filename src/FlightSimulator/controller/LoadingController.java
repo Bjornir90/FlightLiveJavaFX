@@ -139,7 +139,6 @@ public class LoadingController {
 				String departure = departureAirport.getSelectionModel().getSelectedItem(), arrival = arrivalAirport.getSelectionModel().getSelectedItem();
 				if(departure != null && arrival != null){
 					ArrayList<Flight> flights = dataConnection.makeLiaisonRequest(app.getAirports().get(app.getAirportNameToID().get(departure)), app.getAirports().get(app.getAirportNameToID().get(arrival)), app.getAirports());
-					System.out.println("flights = " + flights);
 					if(flights.isEmpty()){
 						Alert alert = new Alert(Alert.AlertType.INFORMATION);
 						alert.setContentText("No flights have been found.");
@@ -158,6 +157,10 @@ public class LoadingController {
 				}
 			});
 
+			departureCountry.getSelectionModel().select("France");
+			departureCity.getSelectionModel().select("Paris");
+			arrivalCountry.getSelectionModel().select("Mali");
+			arrivalCity.getSelectionModel().select("Bamako");
 			interfaceController.setDataModel(dataModel);
 			dataModel.subscribe(interfaceController);
 		}

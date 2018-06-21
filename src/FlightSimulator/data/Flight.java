@@ -10,7 +10,7 @@ public class Flight {
 	private String name;
 	private Plane plane;
 
-	public Flight(Airport departureAirport, Airport arrivalAirport, float[] position, float altitude, float speed, String name) {
+	public Flight(Airport departureAirport, Airport arrivalAirport, float[] position, float altitude, float speed, String name, int Id, boolean mil, String type, String Icao) {
 		if(departureAirport == null || arrivalAirport == null){
 			System.err.println("Missing airport parameters");
 			return;
@@ -21,6 +21,7 @@ public class Flight {
 		this.altitude = altitude;
 		this.speed = speed;
 		this.name = name;
+		this.plane = new Plane(mil, type, Id, Icao);
 	}
 
 	public Airport getDepartureAirport() {

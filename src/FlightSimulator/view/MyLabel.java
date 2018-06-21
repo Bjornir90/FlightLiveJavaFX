@@ -17,8 +17,6 @@ public class MyLabel extends MyView {
 
 	@Override
 	public void notifyViewOfNewData(Object o) {
-		if(o instanceof String){
-			element.setText((String) o);
-		}
+		element.setText(o.toString());
 	}
 }
