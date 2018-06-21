@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class Parser {
 
-	public static HashMap<String, Airport> parse() {
+	public static HashMap<String, Airport> parse(HashMap<String, String> nameToID) {
 		HashMap<String, Airport> airports = new HashMap<>();
 		try
 		{
@@ -35,9 +35,15 @@ public class Parser {
 				position[1] = Float.parseFloat(array[5]);
 
 				line = bufRead.readLine();
-
+				if(icaoId.equals("SPJC")){
+					System.out.println("Found missing airport : "+airportName);
+				}
+				if(cityName.equals("Lima")){
+					System.out.println("\n\n\n\nFound Lima airport : "+airportName+" Code : "+icaoId+"\n\n\n\n\n");
+				}
 				Airport airport = new Airport(cityName,country,airportName,icaoId,position);
 				airports.put(icaoId, airport);
+				nameToID.put(airportName, icaoId);
 			}
 
 			bufRead.close();
@@ -114,6 +120,13 @@ public class Parser {
 			Airport from, to;
 			from = airports.get(flightParsing.From.substring(0, 4));
 			to = airports.get(flightParsing.To.substring(0, 4));
+			if(from == null){
+				System.err.println("Error : missing airport : "+flightParsing.From);
+			}
+			if(to == null){
+				System.err.println("Error : missing airport : "+flightParsing.To);
+				System.exit(1);
+			}
 			float[] position = new float[2];
 			position[0] = flightParsing.Long;
 			position[1] = flightParsing.Lat;

@@ -1,5 +1,7 @@
 package FlightSimulator.data;
 
+import javafx.scene.control.Alert;
+
 public class Flight {
 	private Airport departureAirport, arrivalAirport;
 	private float[] position;
@@ -9,6 +11,10 @@ public class Flight {
 	private Plane plane;
 
 	public Flight(Airport departureAirport, Airport arrivalAirport, float[] position, float altitude, float speed, String name) {
+		if(departureAirport == null || arrivalAirport == null){
+			System.err.println("Missing airport parameters");
+			return;
+		}
 		this.departureAirport = departureAirport;
 		this.arrivalAirport = arrivalAirport;
 		this.position = position;
