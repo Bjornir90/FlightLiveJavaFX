@@ -123,6 +123,7 @@ public class LoadingController {
 				if(arrivalAirport.getSelectionModel().getSelectedItem() != null){
 					validateButton.setDisable(false);
 				}
+				departureCity.setValue(app.getAirports().get(app.getAirportNameToID().get(newValue)).getCity());
 			}
 		}));
 
@@ -171,6 +172,7 @@ public class LoadingController {
 				if(departureAirport.getSelectionModel().getSelectedItem() != null){
 					validateButton.setDisable(false);
 				}
+				arrivalCity.setValue(app.getAirports().get(app.getAirportNameToID().get(newValue)).getCity());
 			}
 		}));
 
@@ -182,7 +184,7 @@ public class LoadingController {
 
 			InterfaceController interfaceController = new InterfaceController(departureCountry, arrivalCountry, departureCity, arrivalCity, departureAirport, arrivalAirport, sizeField, validateButton, settingsButton, flightsList, planeIdLabel, planeHeightLabel, planeSpeedLabel, planeTypeLabel, militaryBoolLabel, departureAirportLabel, arrivalAirportLabel);
 
-			DataModel dataModel = new DataModel(app.getAirports(), app.getCountries());
+			DataModel dataModel = new DataModel(app.getAirports(), app.getCountries(), app.getAirportNameToID());
 
 
 			departureCountry.setOnAction(event -> {
@@ -272,6 +274,7 @@ public class LoadingController {
 			interfaceController.setDataModel(dataModel);
 			dataModel.subscribe(interfaceController);
 			planetController.setSettingsModel(settingsModel);
+			planetController.setDataModel(dataModel);
 			settingsModel.subscribe(planetController);
 
 			/*PlanetController planetController = new PlanetController(root,pane3D);

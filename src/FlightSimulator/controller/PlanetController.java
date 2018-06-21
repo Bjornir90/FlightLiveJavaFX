@@ -79,6 +79,11 @@ public class PlanetController extends Controller{
         Sphere sphere = new Sphere(settingsModel.getCitySize());
         sphere.setMaterial(new PhongMaterial(settingsModel.getColor("city")));
         airports.add(sphere);
+        sphere.setId(name);
+        sphere.setOnMouseClicked(event -> {
+        	HashMap<String, String> nameToID = dataModel.getAirportNameToIcao();
+        	dataModel.notifyNewSelectedAirport(dataModel.getAirports().get(nameToID.get(sphere.getId())));
+        });
         Group towns = new Group();
         towns.getChildren().add(sphere);
         towns.setId(name);

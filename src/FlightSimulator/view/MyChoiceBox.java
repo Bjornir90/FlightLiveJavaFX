@@ -1,14 +1,15 @@
 package FlightSimulator.view;
 
+import FlightSimulator.data.Airport;
 import FlightSimulator.data.Flight;
 import javafx.scene.control.ChoiceBox;
 
 import java.util.ArrayList;
 
-public class MyChoiceBox<T> extends MyView{
-	private ChoiceBox<T> element;
+public class MyChoiceBox extends MyView{
+	private ChoiceBox<String> element;
 
-	public MyChoiceBox(ChoiceBox<T> element){
+	public MyChoiceBox(ChoiceBox element){
 		this.element = element;
 	}
 
@@ -19,7 +20,11 @@ public class MyChoiceBox<T> extends MyView{
 
 	@Override
 	public void notifyViewOfNewData(Object o) {
-
+		if(o instanceof Airport) {
+			Airport airport = (Airport) o;
+			//element.getSelectionModel().select(airport.getName());
+			element.setValue(airport.getName());
+		}
 	}
 
 
