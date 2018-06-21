@@ -20,6 +20,8 @@ import java.util.Collections;
 public class LoadingController {
 	private App app;
 	private DataConnection dataConnection;
+	private ArrayList<Group> departureTowns;
+	private ArrayList<Group> arrivalTowns;
 
 	@FXML
 	ChoiceBox<String> departureCountry;
@@ -42,6 +44,20 @@ public class LoadingController {
 	@FXML
 	ListView<String> flightsList;
 	@FXML
+	Label planeIdLabel;
+	@FXML
+	Label departureAirportLabel;
+	@FXML
+	Label arrivalAirportLabel;
+	@FXML
+	Label planeTypeLabel;
+	@FXML
+	Label militaryBoolLabel;
+	@FXML
+	Label planeSpeedLabel;
+	@FXML
+	Label planeHeightLabel;
+	@FXML
     AnchorPane root;
 	@FXML
 	Pane pane3D;
@@ -50,12 +66,18 @@ public class LoadingController {
 	@FXML
 	public void initialize() {
 		dataConnection = new DataConnection();
+		departureTowns = new ArrayList<>();
+		arrivalTowns = new ArrayList<>();
+		PlanetController planetController = new PlanetController(root,pane3D);
+		Group parent = planetController.displayEarth();
 		//TODO move to another method
 		arrivalCity.setDisable(true);
 		departureCity.setDisable(true);
 		departureAirport.setDisable(true);
 		arrivalAirport.setDisable(true);
 		validateButton.setDisable(true);
+
+
 		departureCountry.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			if(newValue != null){
 				departureCity.setDisable(false);
@@ -66,6 +88,7 @@ public class LoadingController {
 				departureCity.setDisable(true);
 			}
 		});
+
 		departureCity.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
 			if(newValue != null){
 				departureAirport.setDisable(false);
@@ -80,23 +103,39 @@ public class LoadingController {
 				validateButton.setDisable(true);
 			}
 		}));
+
 		departureAirport.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+			for (Group g : departureTowns) {
+				if (!(g.getId().equals(departureAirport.getSelectionModel().getSelectedItem()))) {
+					g.getChildren().clear();
+					//towns.remove(g);
+				}
+			}
 			if(newValue != null){
 				if(arrivalAirport.getSelectionModel().getSelectedItem() != null){
 					validateButton.setDisable(false);
 				}
 			}
 		}));
+
 		arrivalCountry.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+
 			if(newValue != null){
 				arrivalCity.setDisable(false);
 				arrivalAirport.getItems().clear();
 				arrivalAirport.setDisable(true);
 				arrivalCity.setItems(FXCollections.observableArrayList(app.getCountries().get(newValue)));
+				/*for (Group g : towns) {
+					if (!(app.getAirports().containsKey(app.getAirportNameToID().get(g.getId())) && app.getAirports().get(app.getAirportNameToID().get(g.getId())).getCountry().equals(arrivalCountry))) {
+						g.getChildren().clear();
+						//towns.remove(g);
+					}
+				}*/
 			} else {
 				arrivalCity.setDisable(true);
 			}
 		});
+
 		arrivalCity.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
 			if(newValue != null){
 				arrivalAirport.setDisable(false);
@@ -107,11 +146,19 @@ public class LoadingController {
 					}
 				}
 				arrivalAirport.setItems(FXCollections.observableArrayList(dataToPass));
+
 			} else {
 				validateButton.setDisable(true);
 			}
 		}));
+
 		arrivalAirport.getSelectionModel().selectedItemProperty().addListener(((observable, oldValue, newValue) -> {
+			for (Group g : arrivalTowns) {
+				if (!(g.getId().equals(arrivalAirport.getSelectionModel().getSelectedItem()))) {
+					g.getChildren().clear();
+					//towns.remove(g);
+				}
+			}
 			if(newValue != null){
 				if(departureAirport.getSelectionModel().getSelectedItem() != null){
 					validateButton.setDisable(false);
@@ -119,39 +166,56 @@ public class LoadingController {
 			}
 		}));
 
-		if(app != null) {
-			PlanetController planetController = new PlanetController(root,pane3D);
-			Group parent = planetController.displayEarth();
 
+		if(app != null) {
 
 			ObservableList<String> observableListCountry = FXCollections.observableArrayList(app.getCountries().keySet());
 			Collections.sort(observableListCountry);
 			departureCountry.setItems(observableListCountry);
 			arrivalCountry.setItems(observableListCountry);
 
-			InterfaceController interfaceController = new InterfaceController(departureCountry, arrivalCountry, departureCity, arrivalCity, departureAirport, arrivalAirport, sizeField, validateButton, settingsButton, flightsList);
+			InterfaceController interfaceController = new InterfaceController(departureCountry, arrivalCountry, departureCity, arrivalCity, departureAirport, arrivalAirport, sizeField, validateButton, settingsButton, flightsList, planeIdLabel, planeHeightLabel, planeSpeedLabel, planeTypeLabel, militaryBoolLabel, departureAirportLabel, arrivalAirportLabel);
 
 			DataModel dataModel = new DataModel(app.getAirports(), app.getCountries());
 
 
+			departureCountry.setOnAction(event -> {
+				String departure = departureCountry.getSelectionModel().getSelectedItem();
+				if(departure != null) {
+					for(Airport airport : app.getAirports().values()) {
+						if (departure.equals(airport.getCountry())){
+							departureTowns.add(planetController.displayTown(parent, airport.getName(), airport.getPosition()[0], airport.getPosition()[1]));
+						}
+					}
+				}
+			});
 
 			departureAirport.setOnAction(event -> {
 				String departure = departureAirport.getSelectionModel().getSelectedItem();
 				if(departure != null) {
 					if (app.getAirports().containsKey(app.getAirportNameToID().get(departure))){
-						planetController.displayTown(parent, app.getAirports().get(app.getAirportNameToID().get(departure)).getCity(), app.getAirports().get(app.getAirportNameToID().get(departure)).getPosition()[0], app.getAirports().get(app.getAirportNameToID().get(departure)).getPosition()[1]);
+						departureTowns.add(planetController.displayTown(parent, app.getAirports().get(app.getAirportNameToID().get(departure)).getName(), app.getAirports().get(app.getAirportNameToID().get(departure)).getPosition()[0], app.getAirports().get(app.getAirportNameToID().get(departure)).getPosition()[1]));
 
 					}
 				}
 			});
 
-
+			arrivalCountry.setOnAction(event -> {
+				String arrival = arrivalCountry.getSelectionModel().getSelectedItem();
+				if(arrival != null) {
+					for(Airport airport : app.getAirports().values()) {
+						if (arrival.equals(airport.getCountry())){
+							arrivalTowns.add(planetController.displayTown(parent, airport.getName(), airport.getPosition()[0], airport.getPosition()[1]));
+						}
+					}
+				}
+			});
 
 			arrivalAirport.setOnAction(event -> {
 				String arrival = arrivalAirport.getSelectionModel().getSelectedItem();
 				if(arrival != null) {
 					if (app.getAirports().containsKey(app.getAirportNameToID().get(arrival))){
-						planetController.displayTown(parent, app.getAirports().get(app.getAirportNameToID().get(arrival)).getCity(), app.getAirports().get(app.getAirportNameToID().get(arrival)).getPosition()[0], app.getAirports().get(app.getAirportNameToID().get(arrival)).getPosition()[1]);
+						arrivalTowns.add(planetController.displayTown(parent, app.getAirports().get(app.getAirportNameToID().get(arrival)).getName(), app.getAirports().get(app.getAirportNameToID().get(arrival)).getPosition()[0], app.getAirports().get(app.getAirportNameToID().get(arrival)).getPosition()[1]));
 
 					}
 				}

@@ -26,7 +26,6 @@ public class PlanetController {
     public PlanetController(AnchorPane pane,Pane sub) {
         this.pane = pane;
         this.sub=sub;
-        //displayEarth();
     }
 
     public Group displayEarth(){
@@ -71,7 +70,7 @@ public class PlanetController {
         return root3D;
     }
 
-    public void displayTown(Group parent, String name, double latitude, double longitude){
+    public Group displayTown(Group parent, String name, double latitude, double longitude){
         Sphere sphere = new Sphere(0.01);
         Group towns = new Group();
         towns.getChildren().add(sphere);
@@ -80,6 +79,7 @@ public class PlanetController {
         Translate move = new Translate(location.getX(),location.getY(),location.getZ());
         towns.getTransforms().add(move);
         parent.getChildren().add(towns);
+        return towns;
     }
 
 
