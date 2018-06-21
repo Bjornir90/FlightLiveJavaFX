@@ -8,7 +8,10 @@ import FlightSimulator.utils.DataConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,6 +41,11 @@ public class LoadingController {
 	TextField sizeField;
 	@FXML
 	ListView<String> flightsList;
+	@FXML
+    AnchorPane root;
+	@FXML
+	Pane pane3D;
+
 
 	@FXML
 	public void initialize() {
@@ -112,6 +120,10 @@ public class LoadingController {
 		}));
 
 		if(app != null) {
+			PlanetController planetController = new PlanetController(root,pane3D);
+			Group parent = planetController.displayEarth();
+
+
 			ObservableList<String> observableListCountry = FXCollections.observableArrayList(app.getCountries().keySet());
 			Collections.sort(observableListCountry);
 			departureCountry.setItems(observableListCountry);
@@ -121,11 +133,35 @@ public class LoadingController {
 
 			DataModel dataModel = new DataModel(app.getAirports(), app.getCountries());
 
+
+
+			departureAirport.setOnAction(event -> {
+				String departure = departureAirport.getSelectionModel().getSelectedItem();
+				if(departure != null) {
+					if (app.getAirports().containsKey(app.getAirportNameToID().get(departure))){
+						planetController.displayTown(parent, app.getAirports().get(app.getAirportNameToID().get(departure)).getCity(), app.getAirports().get(app.getAirportNameToID().get(departure)).getPosition()[0], app.getAirports().get(app.getAirportNameToID().get(departure)).getPosition()[1]);
+
+					}
+				}
+			});
+
+
+
+			arrivalAirport.setOnAction(event -> {
+				String arrival = arrivalAirport.getSelectionModel().getSelectedItem();
+				if(arrival != null) {
+					if (app.getAirports().containsKey(app.getAirportNameToID().get(arrival))){
+						planetController.displayTown(parent, app.getAirports().get(app.getAirportNameToID().get(arrival)).getCity(), app.getAirports().get(app.getAirportNameToID().get(arrival)).getPosition()[0], app.getAirports().get(app.getAirportNameToID().get(arrival)).getPosition()[1]);
+
+					}
+				}
+			});
+
 			validateButton.setOnMouseClicked(event -> {
 				String departure = departureAirport.getSelectionModel().getSelectedItem(), arrival = arrivalAirport.getSelectionModel().getSelectedItem();
 				if(departure != null && arrival != null){
 					ArrayList<Flight> flights = dataConnection.makeLiaisonRequest(app.getAirports().get(app.getAirportNameToID().get(departure)), app.getAirports().get(app.getAirportNameToID().get(arrival)), app.getAirports());
-					System.out.println("flights = " + flights);
+					//System.out.println("flights = " + flights);
 					if(flights.isEmpty()){
 						Alert alert = new Alert(Alert.AlertType.INFORMATION);
 						alert.setContentText("No flights have been found.");
@@ -135,7 +171,7 @@ public class LoadingController {
 						return;
 					}
 					dataModel.notifyNewFlightList(flights);
-				}
+					}
 			});
 
 			flightsList.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
@@ -146,6 +182,10 @@ public class LoadingController {
 
 			interfaceController.setDataModel(dataModel);
 			dataModel.subscribe(interfaceController);
+
+			/*PlanetController planetController = new PlanetController(root,pane3D);
+			Group parent = planetController.displayEarth();*/
+			//planetController.displayTown(parent, departureAirport.getSelectionModel().getSelectedItem(),);
 		}
 
 
