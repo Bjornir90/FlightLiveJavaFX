@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.Sphere;
@@ -71,7 +72,8 @@ public class PlanetController extends Controller{
     }
 
     public Group displayTown(Group parent, String name, double latitude, double longitude){
-        Sphere sphere = new Sphere(0.01);
+        Sphere sphere = new Sphere(settingsModel.getCitySize());
+        sphere.setMaterial(new PhongMaterial(settingsModel.getColor("city")));
         Group towns = new Group();
         towns.getChildren().add(sphere);
         towns.setId(name);
@@ -122,6 +124,18 @@ public class PlanetController extends Controller{
 
     @Override
     public void notifyControllerOfNewSettings(Object data, int dataType) {
-
+		if(dataType == Controller.CITYSIZEDATA){
+			sub.getChildren().forEach(node -> {
+				if(node instanceof Sphere){
+					((Sphere) node).setRadius((double) data);
+				}
+			});
+		} else if (dataType == Controller.COLORDATA){
+			sub.getChildren().forEach(node -> {
+				if(node instanceof Sphere){
+					((Sphere) node).setMaterial(new PhongMaterial((Color) data));
+				}
+			});
+		}
     }
 }
