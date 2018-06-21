@@ -199,8 +199,8 @@ public class LoadingController {
 
 		departureCountry.getSelectionModel().select("France");
 		departureCity.getSelectionModel().select("Paris");
-		arrivalCountry.getSelectionModel().select("Mali");
-		arrivalCity.getSelectionModel().select("Bamako");
+		arrivalCountry.getSelectionModel().select("Italy");
+		arrivalCity.getSelectionModel().select("Naples");
 		//TODO remove setSelection
 		interfaceController.setDataModel(dataModel);
 		dataModel.subscribe(interfaceController);
