@@ -1,13 +1,12 @@
 package FlightSimulator.controller;
 
+import FlightSimulator.utils.Fx3DGroup;
 import com.interactivemesh.jfx.importer.ImportException;
 import com.interactivemesh.jfx.importer.obj.ObjModelImporter;
-import javafx.geometry.Insets;
 import javafx.geometry.Point3D;
 import javafx.scene.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.MeshView;
@@ -80,6 +79,34 @@ public class PlanetController {
         towns.getTransforms().add(move);
         parent.getChildren().add(towns);
         return towns;
+    }
+
+    public Group displayPlane(Group parent, String id, double latitude, double longitude){
+        Group planes= new Group();
+        ObjModelImporter objImporter = new ObjModelImporter();
+        try{
+            URL modelUrl = this.getClass().getResource("Plane/plane.obj");
+            objImporter.read(modelUrl);
+        }catch (ImportException e){
+            System.out.println(e.getMessage());
+        }
+        MeshView[] meshViews = objImporter.getImport();
+
+        Fx3DGroup planeScale = new Fx3DGroup(meshViews);
+        Fx3DGroup planeOffset = new Fx3DGroup(planeScale);
+        Fx3DGroup plane = new Fx3DGroup(planeOffset);
+        Point3D location = geoCoordTo3dCoord(latitude,longitude);
+        Fx3DGroup translate = new Fx3DGroup(plane);
+        planeScale.set3DScale(0.02);
+        planeOffset.set3DTranslate(0,-1,0);
+        System.out.println(location.getX()+", "+location.getY()+", " + location.getZ());
+        translate.set3DTranslate(location.getX(),location.getY(),location.getZ());
+        //Group plane = new Group(meshViews);
+        planes.getChildren().add(plane);
+        planes.setId(id);
+
+        parent.getChildren().add(plane);
+        return planes;
     }
 
 

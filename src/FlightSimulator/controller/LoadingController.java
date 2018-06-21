@@ -235,6 +235,10 @@ public class LoadingController {
 						return;
 					}
 					dataModel.notifyNewFlightList(flights);
+					for(Flight flight : flights) {
+						System.out.println(flight.getPosition());
+						planetController.displayPlane(parent, flight.getName(), flight.getPosition()[0],flight.getPosition()[1]);
+					}
 				}
 			});
 
