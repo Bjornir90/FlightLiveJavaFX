@@ -29,12 +29,12 @@ public class PopupController extends Controller{
 
 	@FXML
 	public void initialize(){
-		planeSize.setMin(0.01);
+		planeSize.setMin(0.001);
 		planeSize.setMax(0.2);
-		citySize.setMin(0.01);
+		citySize.setMin(0.001);
 		citySize.setMax(0.2);
-		planeSize.setBlockIncrement(0.01);
-		citySize.setBlockIncrement(0.01);
+		planeSize.setBlockIncrement(0.001);
+		citySize.setBlockIncrement(0.001);
 		validateButton.setOnMouseClicked(event -> {
 			Stage popupStage = (Stage) validateButton.getParent().getScene().getWindow();
 			popupStage.close();

@@ -17,16 +17,20 @@ import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PlanetController extends Controller{
     private AnchorPane pane;
     private Pane sub;
+    private ArrayList<Sphere> airports;
     private static final double TEXTURE_LAT_OFFSET = -0.2f;
     private static final double TEXTURE_LON_OFFSET = 2.8f;
 
     public PlanetController(AnchorPane pane,Pane sub) {
         this.pane = pane;
         this.sub=sub;
+        airports = new ArrayList<>();
     }
 
     public Group displayEarth(){
@@ -74,6 +78,7 @@ public class PlanetController extends Controller{
     public Group displayTown(Group parent, String name, double latitude, double longitude){
         Sphere sphere = new Sphere(settingsModel.getCitySize());
         sphere.setMaterial(new PhongMaterial(settingsModel.getColor("city")));
+        airports.add(sphere);
         Group towns = new Group();
         towns.getChildren().add(sphere);
         towns.setId(name);
@@ -125,17 +130,16 @@ public class PlanetController extends Controller{
     @Override
     public void notifyControllerOfNewSettings(Object data, int dataType) {
 		if(dataType == Controller.CITYSIZEDATA){
-			sub.getChildren().forEach(node -> {
-				if(node instanceof Sphere){
-					((Sphere) node).setRadius((double) data);
-				}
-			});
+			for(Sphere sphere : airports){
+				System.out.println("Changed size of airport");
+				sphere.setRadius((double) data);
+			}
 		} else if (dataType == Controller.COLORDATA){
-			sub.getChildren().forEach(node -> {
-				if(node instanceof Sphere){
-					((Sphere) node).setMaterial(new PhongMaterial((Color) data));
-				}
-			});
+			HashMap<String, Color> hashMap = (HashMap) data;
+			for(Sphere sphere : airports){
+				System.out.println("Changed color of city");
+				sphere.setMaterial(new PhongMaterial(hashMap.get("city")));
+			}
 		}
     }
 }

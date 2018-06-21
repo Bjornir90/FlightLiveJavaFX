@@ -272,6 +272,7 @@ public class LoadingController {
 			interfaceController.setDataModel(dataModel);
 			dataModel.subscribe(interfaceController);
 			planetController.setSettingsModel(settingsModel);
+			settingsModel.subscribe(planetController);
 
 			/*PlanetController planetController = new PlanetController(root,pane3D);
 			Group parent = planetController.displayEarth();*/
