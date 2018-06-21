@@ -167,8 +167,6 @@ public class LoadingController {
 		}));
 
 
-		if(app != null) {
-
 			ObservableList<String> observableListCountry = FXCollections.observableArrayList(app.getCountries().keySet());
 			Collections.sort(observableListCountry);
 			departureCountry.setItems(observableListCountry);
@@ -250,7 +248,6 @@ public class LoadingController {
 			/*PlanetController planetController = new PlanetController(root,pane3D);
 			Group parent = planetController.displayEarth();*/
 			//planetController.displayTown(parent, departureAirport.getSelectionModel().getSelectedItem(),);
-		}
 	}
 
 	public void setApp(App app) {
