@@ -47,9 +47,9 @@ public class InterfaceController extends Controller{
 	}
 
 	@Override
-	public void notifyControllerOfNewData(Object o) {
+	public void notifyControllerOfNewData(Object o, int dataType) {
 		//subscribers.forEach(view -> view.notifyViewOfNewData(o));
-		if(o instanceof Flight){
+		if(dataType == Controller.FLIGHTDATA){
 			Flight flight = (Flight) o;
 			labels.get("planeId").notifyViewOfNewData(flight.getPlane().getId());
 			labels.get("planeType").notifyViewOfNewData(flight.getPlane().getType());
@@ -58,7 +58,7 @@ public class InterfaceController extends Controller{
 			labels.get("military").notifyViewOfNewData(flight.getPlane().isMilitary());
 			labels.get("departureAirport").notifyViewOfNewData(flight.getDepartureAirport().getName());
 			labels.get("arrivalAirport").notifyViewOfNewData(flight.getArrivalAirport().getName());
-		} else if (o instanceof ArrayList){
+		} else if (dataType == Controller.LISTDATA){
 			ArrayList<Flight> list = (ArrayList) o;
 			flightList.notifyViewOfNewData(list);
 		}
@@ -67,5 +67,6 @@ public class InterfaceController extends Controller{
 	@Override
 	public void notifyControllerOfNewSettings(Object data, int dataType) {
 		System.out.println("data = " + data);
+		//Nothing to do
 	}
 }

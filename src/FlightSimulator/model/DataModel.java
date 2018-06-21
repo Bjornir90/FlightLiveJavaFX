@@ -23,12 +23,12 @@ public class DataModel {
 
 	public void notifyNewFlightList(ArrayList<Flight> flights){
 		this.flights = flights;
-		notifyControllers(flights);
+		notifyControllers(flights, Controller.LISTDATA);
 	}
 
-	private void notifyControllers(Object o){
+	private void notifyControllers(Object o, int dataType){
 		for(Controller controller : subscribers){
-			controller.notifyControllerOfNewData(o);
+			controller.notifyControllerOfNewData(o, dataType);
 		}
 	}
 
@@ -36,7 +36,7 @@ public class DataModel {
 		for(Flight flight : flights){
 			if(flight.getName().equals(flightName)){
 				selectedFlight = flight;
-				notifyControllers(flight);
+				notifyControllers(flight, Controller.FLIGHTDATA);
 			}
 		}
 	}

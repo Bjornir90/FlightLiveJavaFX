@@ -7,8 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class Main extends Application {
@@ -16,16 +14,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 	    App app = new App();
-	    /*DataConnection con = new DataConnection();
-	    ArrayList<Flight> requestResult = con.makeLiaisonRequest("LFPO", "KJFK");
-	    System.out.println("requestResult = " + requestResult);*/
-
 
 	    FXMLLoader loader = new FXMLLoader(getClass().getResource("controller/GraphicInterface.fxml"));
 	    Parent root = loader.load();
 	    LoadingController controller = loader.getController();
 	    controller.setApp(app);
-	    controller.initialize();
 	    primaryStage.setTitle("Flight Live JavaFX");
 	    primaryStage.setScene(new Scene(root));
 	    primaryStage.show();

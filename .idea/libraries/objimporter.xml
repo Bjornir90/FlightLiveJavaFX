@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="objimporter">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/libs/objimporter" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/libs/objimporter" recursive="false" />
+  </library>
+</component>
