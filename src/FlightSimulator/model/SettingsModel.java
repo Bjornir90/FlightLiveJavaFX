@@ -14,7 +14,7 @@ public class SettingsModel {
 	public SettingsModel(){
 		subscribers = new ArrayList<>();
 		colors = new HashMap<>();
-		colors.put("plane", Color.AZURE);
+		colors.put("plane", Color.RED);
 		colors.put("city", Color.BLUE);
 		planeSize = 10;
 		citySize = 10;
