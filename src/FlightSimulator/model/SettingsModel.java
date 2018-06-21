@@ -8,7 +8,8 @@ import java.util.HashMap;
 
 public class SettingsModel {
 	private HashMap<String, Color> colors;
-	private long planeSize, citySize;
+	private double planeSize;
+	private double citySize;
 	private ArrayList<Controller> subscribers;
 
 	public SettingsModel(){
@@ -16,39 +17,39 @@ public class SettingsModel {
 		colors = new HashMap<>();
 		colors.put("plane", Color.RED);
 		colors.put("city", Color.BLUE);
-		planeSize = 10;
-		citySize = 10;
+		planeSize = 0.01;
+		citySize = 0.01;
 	}
 
 	public void setColor(Color color, String name){
 		this.colors.replace(name, color);
-		notifyControllers(colors, Controller.COLORDATA);
+		if(name.equals("plane")) {
+			notifyControllers(colors, Controller.PLANECOLORDATA);
+		} else if(name.equals("city")){
+			notifyControllers(colors, Controller.CITYCOLORDATA);
+		}
 	}
 
 	public Color getColor(String name){
 		return this.colors.get(name);
 	}
 
-	public long getPlaneSize() {
+	public double getPlaneSize() {
 		return planeSize;
 	}
 
 	public void setPlaneSize(double planeSize) {
-		long roundedValue = Math.round(planeSize);
-		if(roundedValue == this.planeSize) return;//So the controllers don't get spammed with the same value
-		this.planeSize = roundedValue;
+		this.planeSize = planeSize;
 		notifyControllers(this.planeSize, Controller.PLANESIZEDATA);
 
 	}
 
-	public long getCitySize() {
+	public double getCitySize() {
 		return citySize;
 	}
 
 	public void setCitySize(double citySize) {
-		long roundedValue = Math.round(citySize);
-		if(roundedValue == this.citySize) return;//So the controllers don't get spammed with the same value
-		this.citySize = roundedValue;
+		this.citySize = citySize;
 		notifyControllers(this.citySize, Controller.CITYSIZEDATA);
 	}
 

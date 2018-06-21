@@ -8,6 +8,7 @@ import javafx.scene.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.Sphere;
@@ -15,16 +16,20 @@ import javafx.scene.transform.Rotate;
 import javafx.scene.transform.Translate;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-public class PlanetController {
+public class PlanetController extends Controller{
     private AnchorPane pane;
     private Pane sub;
+    private ArrayList<Sphere> airports;
     private static final double TEXTURE_LAT_OFFSET = -0.2f;
     private static final double TEXTURE_LON_OFFSET = 2.8f;
 
     public PlanetController(AnchorPane pane,Pane sub) {
         this.pane = pane;
         this.sub=sub;
+        airports = new ArrayList<>();
     }
 
     public Group displayEarth(){
@@ -70,7 +75,14 @@ public class PlanetController {
     }
 
     public Group displayTown(Group parent, String name, double latitude, double longitude){
-        Sphere sphere = new Sphere(0.01);
+        Sphere sphere = new Sphere(settingsModel.getCitySize());
+        sphere.setMaterial(new PhongMaterial(settingsModel.getColor("city")));
+        airports.add(sphere);
+        sphere.setId(name);
+        sphere.setOnMouseClicked(event -> {
+        	HashMap<String, String> nameToID = dataModel.getAirportNameToIcao();
+        	dataModel.notifyNewSelectedAirport(dataModel.getAirports().get(nameToID.get(sphere.getId())));
+        });
         Group towns = new Group();
         towns.getChildren().add(sphere);
         towns.setId(name);
@@ -142,5 +154,22 @@ public class PlanetController {
     }
 
 
+    @Override
+    public void notifyControllerOfNewData(Object o, int dataType) {
+        //TODO use this method for new data
+    }
 
+    @Override
+    public void notifyControllerOfNewSettings(Object data, int dataType) {
+		if(dataType == Controller.CITYSIZEDATA){
+			for(Sphere sphere : airports){
+				sphere.setRadius((double) data);
+			}
+		} else if (dataType == Controller.CITYCOLORDATA){
+			HashMap<String, Color> hashMap = (HashMap) data;
+			for(Sphere sphere : airports){
+				sphere.setMaterial(new PhongMaterial(hashMap.get("city")));
+			}
+		}
+    }
 }

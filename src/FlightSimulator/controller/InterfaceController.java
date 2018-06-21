@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.function.Consumer;
 
 public class InterfaceController extends Controller{
-	private HashMap<String, MyChoiceBox<String>> choiceBoxes;
+	private HashMap<String, MyChoiceBox> choiceBoxes;
 	private HashMap<String, MyLabel> labels;
 	private Button validate, settings;
 	private MyTextField size;
@@ -18,12 +18,12 @@ public class InterfaceController extends Controller{
 	public InterfaceController(ChoiceBox<String> departureCountry, ChoiceBox<String> arrivalCountry, ChoiceBox<String> departureCity, ChoiceBox<String> arrivalCity, ChoiceBox<String> departureAirport, ChoiceBox<String> arrivalAirport, TextField size, Button validate, Button settings, ListView<String> list, Label planeIdLabel, Label planeHeightLabel, Label planeSpeedLabel, Label planeTypeLabel, Label militaryBoolLabel, Label departureAirportLabel, Label arrivalAirportLabel){
 		choiceBoxes = new HashMap<>();
 		labels = new HashMap<>();
-		choiceBoxes.put("departureCountry", new MyChoiceBox<>(departureCountry));
-		choiceBoxes.put("arrivalCountry", new MyChoiceBox<>(arrivalCountry));
-		choiceBoxes.put("departureCity", new MyChoiceBox<>(departureCity));
-		choiceBoxes.put("arrivalCity", new MyChoiceBox<>(arrivalCity));
-		choiceBoxes.put("departureAirport", new MyChoiceBox<>(departureAirport));
-		choiceBoxes.put("arrivalAirport", new MyChoiceBox<>(arrivalAirport));
+		choiceBoxes.put("departureCountry", new MyChoiceBox(departureCountry));
+		choiceBoxes.put("arrivalCountry", new MyChoiceBox(arrivalCountry));
+		choiceBoxes.put("departureCity", new MyChoiceBox(departureCity));
+		choiceBoxes.put("arrivalCity", new MyChoiceBox(arrivalCity));
+		choiceBoxes.put("departureAirport", new MyChoiceBox(departureAirport));
+		choiceBoxes.put("arrivalAirport", new MyChoiceBox(arrivalAirport));
 		labels.put("planeId", new MyLabel(planeIdLabel));
 		labels.put("planeHeight", new MyLabel(planeHeightLabel));
 		labels.put("planeType", new MyLabel(planeTypeLabel));
@@ -61,6 +61,10 @@ public class InterfaceController extends Controller{
 		} else if (dataType == Controller.LISTDATA){
 			ArrayList<Flight> list = (ArrayList) o;
 			flightList.notifyViewOfNewData(list);
+		} else if (dataType == Controller.FROMAIRPORTDATA){
+			choiceBoxes.get("departureAirport").notifyViewOfNewData(o);
+		} else if (dataType == Controller.TOAIRPORTDATA){
+			choiceBoxes.get("arrivalAirport").notifyViewOfNewData(o);
 		}
 	}
 
