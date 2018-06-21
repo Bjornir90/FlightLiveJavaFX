@@ -25,7 +25,6 @@ public class Main extends Application {
 	    Parent root = loader.load();
 	    LoadingController controller = loader.getController();
 	    controller.setApp(app);
-	    controller.initialize();
 	    primaryStage.setTitle("Flight Live JavaFX");
 	    primaryStage.setScene(new Scene(root));
 	    primaryStage.show();

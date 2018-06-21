@@ -2,8 +2,6 @@ package FlightSimulator.controller;
 
 import FlightSimulator.model.SettingsModel;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Slider;
@@ -32,6 +30,10 @@ public class PopupController {
 		citySize.setMax(20.0);
 		planeSize.setBlockIncrement(1.0);
 		citySize.setBlockIncrement(1.0);
+		validateButton.setOnMouseClicked(event -> {
+			Stage popupStage = (Stage) validateButton.getParent().getScene().getWindow();
+			popupStage.close();
+		});
 	}
 
 	private void onModelLoaded(){
@@ -45,11 +47,6 @@ public class PopupController {
 		citySize.valueProperty().addListener((observable, oldValue, newValue) ->    model.setCitySize((double) newValue));
 		planeColor.valueProperty().addListener((observable, oldValue, newValue) ->	model.setColor(newValue, "plane"));
 		cityColor.valueProperty().addListener((observable, oldValue, newValue) -> 	model.setColor(newValue, "city"));
-
-		validateButton.setOnMouseClicked(event -> {
-			Stage popupStage = (Stage) validateButton.getParent().getScene().getWindow();
-			popupStage.close();
-		});
 	}
 
 	public void setModel(SettingsModel model) {
