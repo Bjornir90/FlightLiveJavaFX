@@ -11,13 +11,14 @@ public abstract class Controller {
 	protected ArrayList<MyView> subscribers;
 	protected DataModel dataModel;
 	protected SettingsModel settingsModel;
+	public static final int COLORDATA = 0, SIZEDATA = 1;//For settings data
 
 	public Controller(){
 		subscribers = new ArrayList<>();
 	}
 
 	public abstract void notifyControllerOfNewData(Object o);
-	public abstract void notifyControllerOfNewSettings();
+	public abstract void notifyControllerOfNewSettings(Object data, int dataType);
 
 
 	public void subscribe(MyView view){

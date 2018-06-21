@@ -4,6 +4,7 @@ import FlightSimulator.App;
 import FlightSimulator.data.Airport;
 import FlightSimulator.data.Flight;
 import FlightSimulator.model.DataModel;
+import FlightSimulator.model.SettingsModel;
 import FlightSimulator.utils.DataConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -142,6 +143,7 @@ public class LoadingController {
 			InterfaceController interfaceController = new InterfaceController(departureCountry, arrivalCountry, departureCity, arrivalCity, departureAirport, arrivalAirport, sizeField, validateButton, settingsButton, flightsList, planeIdLabel, planeHeightLabel, planeSpeedLabel, planeTypeLabel, militaryBoolLabel, departureAirportLabel, arrivalAirportLabel);
 
 			DataModel dataModel = new DataModel(app.getAirports(), app.getCountries());
+			SettingsModel settingsModel = new SettingsModel();
 
 			validateButton.setOnMouseClicked(event -> {
 				String departure = departureAirport.getSelectionModel().getSelectedItem(), arrival = arrivalAirport.getSelectionModel().getSelectedItem();
@@ -161,7 +163,10 @@ public class LoadingController {
 
 			settingsButton.setOnMouseClicked(event -> {
 				try {
-					Parent root = FXMLLoader.load(getClass().getResource("SettingsPopup.fxml"));
+					FXMLLoader loader = new FXMLLoader(getClass().getResource("SettingsPopup.fxml"));
+					Parent root = loader.load();
+					PopupController popupController = loader.getController();
+					popupController.setModel(settingsModel);
 					Scene scene = new Scene(root);
 					Stage stage = new Stage();
 					stage.setScene(scene);
@@ -187,6 +192,7 @@ public class LoadingController {
 			arrivalCity.getSelectionModel().select("Bamako");
 			interfaceController.setDataModel(dataModel);
 			dataModel.subscribe(interfaceController);
+			settingsModel.subscribe(interfaceController);
 		}
 
 

@@ -65,7 +65,7 @@ public class InterfaceController extends Controller{
 	}
 
 	@Override
-	public void notifyControllerOfNewSettings() {
-
+	public void notifyControllerOfNewSettings(Object data, int dataType) {
+		System.out.println("data = " + data);
 	}
 }
