@@ -131,13 +131,11 @@ public class PlanetController extends Controller{
     public void notifyControllerOfNewSettings(Object data, int dataType) {
 		if(dataType == Controller.CITYSIZEDATA){
 			for(Sphere sphere : airports){
-				System.out.println("Changed size of airport");
 				sphere.setRadius((double) data);
 			}
-		} else if (dataType == Controller.COLORDATA){
+		} else if (dataType == Controller.CITYCOLORDATA){
 			HashMap<String, Color> hashMap = (HashMap) data;
 			for(Sphere sphere : airports){
-				System.out.println("Changed color of city");
 				sphere.setMaterial(new PhongMaterial(hashMap.get("city")));
 			}
 		}

@@ -23,7 +23,11 @@ public class SettingsModel {
 
 	public void setColor(Color color, String name){
 		this.colors.replace(name, color);
-		notifyControllers(colors, Controller.COLORDATA);
+		if(name.equals("plane")) {
+			notifyControllers(colors, Controller.PLANECOLORDATA);
+		} else if(name.equals("city")){
+			notifyControllers(colors, Controller.CITYCOLORDATA);
+		}
 	}
 
 	public Color getColor(String name){
