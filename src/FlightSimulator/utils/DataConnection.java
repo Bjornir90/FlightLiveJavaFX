@@ -59,12 +59,12 @@ public class DataConnection {
 		ArrayList<Flight> list2 = Parser.getResponseFlight(flightList2, airports);
 		ArrayList<Flight> liaisonList = new ArrayList<>();
 		for(Flight f : list1){
-			if(f.getArrivalAirport().equals(airport2) && f.getDepartureAirport().equals(airport1)){
+			if(f.getArrivalAirport().equals(airport2) && f.getDepartureAirport().equals(airport1) && !liaisonList.contains(f)){
 				liaisonList.add(f);
 			}
 		}
 		for(Flight f : list2){
-			if(f.getArrivalAirport().equals(airport2) && f.getDepartureAirport().equals(airport1)){
+			if(f.getArrivalAirport().equals(airport2) && f.getDepartureAirport().equals(airport1) && !liaisonList.contains(f)){
 				liaisonList.add(f);
 			}
 		}

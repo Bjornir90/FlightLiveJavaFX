@@ -62,7 +62,7 @@ public class PopupController extends Controller{
 	}
 
 	@Override
-	public void notifyControllerOfNewData(Object o) {
+	public void notifyControllerOfNewData(Object o, int dataType) {
 		//Nothing to do
 	}
 
