@@ -14,10 +14,6 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 	    App app = new App();
-	    /*DataConnection con = new DataConnection();
-	    ArrayList<Flight> requestResult = con.makeLiaisonRequest("LFPO", "KJFK");
-	    System.out.println("requestResult = " + requestResult);*/
-
 
 	    FXMLLoader loader = new FXMLLoader(getClass().getResource("controller/GraphicInterface.fxml"));
 	    Parent root = loader.load();

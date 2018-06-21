@@ -31,7 +31,6 @@ public class DataConnection {
 		ListenableFuture<Response> future = getRequest.execute();
 		try {
 			Response result = future.get();
-			System.out.println("In DataConnection : response is : "+result.getResponseBody());
 			return result.getResponseBody();
 		} catch (InterruptedException e) {
 			e.printStackTrace();

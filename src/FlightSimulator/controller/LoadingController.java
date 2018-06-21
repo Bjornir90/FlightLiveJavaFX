@@ -10,12 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -150,7 +152,10 @@ public class LoadingController {
 		validateButton.setOnMouseClicked(event -> {
 			String departure = departureAirport.getSelectionModel().getSelectedItem(), arrival = arrivalAirport.getSelectionModel().getSelectedItem();
 			if(departure != null && arrival != null){
+				Scene scene = validateButton.getScene();
+				scene.setCursor(Cursor.WAIT);
 				ArrayList<Flight> flights = dataConnection.makeLiaisonRequest(app.getAirports().get(app.getAirportNameToID().get(departure)), app.getAirports().get(app.getAirportNameToID().get(arrival)), app.getAirports());
+				scene.setCursor(Cursor.DEFAULT);
 				if(flights.isEmpty()){
 					Alert alert = new Alert(Alert.AlertType.INFORMATION);
 					alert.setContentText("No flights have been found.");
