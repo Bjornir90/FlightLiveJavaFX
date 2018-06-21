@@ -21,9 +21,10 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
+            <Label text="Avion" />
             <HBox alignment="CENTER_LEFT" spacing="35.0">
                <children>
-                  <Label text="Couleur des avions" />
+                  <Label text="Couleur" />
                   <ColorPicker fx:id="planeColor" />
                </children>
                <VBox.margin>
@@ -32,27 +33,30 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" spacing="50.0">
                <children>
-                  <Label text="Taille des avions" />
+                  <Label text="Taille" />
                   <Slider fx:id="planeSize" prefHeight="16.0" prefWidth="169.0" />
+                  <Label fx:id="planeSizeLabel" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </HBox>
             <Separator prefWidth="200.0" />
-            <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="25.0" spacing="43.0">
+            <Label text="Ville" />
+            <HBox alignment="CENTER_LEFT" layoutX="25.0" layoutY="25.0" spacing="35.0">
                <children>
-                  <Label text="Couleur des villes" />
+                  <Label text="Couleur" />
                   <ColorPicker fx:id="cityColor" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" spacing="60.0">
+            <HBox alignment="CENTER_LEFT" spacing="50.0">
                <children>
-                  <Label text="Taille des villes" />
+                  <Label text="Taille" />
                   <Slider fx:id="citySize" prefHeight="16.0" prefWidth="169.0" />
+                  <Label fx:id="citySizeLabel" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

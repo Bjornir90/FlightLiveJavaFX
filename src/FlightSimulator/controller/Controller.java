@@ -11,7 +11,7 @@ public abstract class Controller {
 	protected ArrayList<MyView> subscribers;
 	protected DataModel dataModel;
 	protected SettingsModel settingsModel;
-	public static final int COLORDATA = 0, SIZEDATA = 1;//For settings data
+	public static final int COLORDATA = 0, PLANESIZEDATA = 1, CITYSIZEDATA = 2;//For settings data
 
 	public Controller(){
 		subscribers = new ArrayList<>();

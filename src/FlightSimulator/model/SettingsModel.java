@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class SettingsModel {
 	private HashMap<String, Color> colors;
-	private double planeSize, citySize;
+	private long planeSize, citySize;
 	private ArrayList<Controller> subscribers;
 
 	public SettingsModel(){
@@ -29,23 +29,27 @@ public class SettingsModel {
 		return this.colors.get(name);
 	}
 
-	public double getPlaneSize() {
+	public long getPlaneSize() {
 		return planeSize;
 	}
 
 	public void setPlaneSize(double planeSize) {
-		this.planeSize = planeSize;
-		notifyControllers(planeSize, Controller.SIZEDATA);
+		long roundedValue = Math.round(planeSize);
+		if(roundedValue == this.planeSize) return;//So the controllers don't get spammed with the same value
+		this.planeSize = roundedValue;
+		notifyControllers(this.planeSize, Controller.PLANESIZEDATA);
 
 	}
 
-	public double getCitySize() {
+	public long getCitySize() {
 		return citySize;
 	}
 
 	public void setCitySize(double citySize) {
-		this.citySize = citySize;
-		notifyControllers(citySize, Controller.SIZEDATA);
+		long roundedValue = Math.round(citySize);
+		if(roundedValue == this.citySize) return;//So the controllers don't get spammed with the same value
+		this.citySize = roundedValue;
+		notifyControllers(this.citySize, Controller.CITYSIZEDATA);
 	}
 
 	public void subscribe(Controller controller){

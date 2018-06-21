@@ -169,6 +169,7 @@ public class LoadingController {
 				Parent root = loader.load();
 				PopupController popupController = loader.getController();
 				popupController.setModel(settingsModel);
+				settingsModel.subscribe(popupController);
 				Scene scene = new Scene(root);
 				Stage stage = new Stage();
 				stage.setScene(scene);

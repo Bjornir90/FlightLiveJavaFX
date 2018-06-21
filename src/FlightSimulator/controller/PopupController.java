@@ -4,11 +4,12 @@ import FlightSimulator.model.SettingsModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.stage.Stage;
 
 
-public class PopupController {
+public class PopupController extends Controller{
 	private SettingsModel model;
 
 	@FXML
@@ -21,6 +22,10 @@ public class PopupController {
 	ColorPicker cityColor;
 	@FXML
 	Button validateButton;
+	@FXML
+	Label citySizeLabel;
+	@FXML
+	Label planeSizeLabel;
 
 	@FXML
 	public void initialize(){
@@ -39,6 +44,8 @@ public class PopupController {
 	private void onModelLoaded(){
 		planeSize.setValue(model.getPlaneSize());
 		citySize.setValue(model.getCitySize());
+		planeSizeLabel.setText(model.getPlaneSize()+" px");
+		citySizeLabel.setText((model.getCitySize()+" px"));
 
 		planeColor.setValue(model.getColor("plane"));
 		cityColor.setValue(model.getColor("city"));
@@ -52,5 +59,19 @@ public class PopupController {
 	public void setModel(SettingsModel model) {
 		this.model = model;
 		onModelLoaded();
+	}
+
+	@Override
+	public void notifyControllerOfNewData(Object o) {
+		//Nothing to do
+	}
+
+	@Override
+	public void notifyControllerOfNewSettings(Object data, int dataType) {
+		if(dataType == Controller.PLANESIZEDATA){
+			planeSizeLabel.setText(model.getPlaneSize()+" px");
+		} else if (dataType == Controller.CITYSIZEDATA){
+			citySizeLabel.setText((model.getCitySize()+" px"));
+		}
 	}
 }
