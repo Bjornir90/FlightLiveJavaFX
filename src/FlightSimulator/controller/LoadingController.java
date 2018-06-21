@@ -14,6 +14,8 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.Group;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,6 +23,7 @@ import javafx.stage.Window;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 
 public class LoadingController {
@@ -202,6 +205,9 @@ public class LoadingController {
 		interfaceController.setDataModel(dataModel);
 		dataModel.subscribe(interfaceController);
 		settingsModel.subscribe(interfaceController);
+		/*PlanetController planetController = new PlanetController(root,pane3D);
+			Group parent = planetController.displayEarth();*/
+		//planetController.displayTown(parent, departureAirport.getSelectionModel().getSelectedItem(),);
 	}
 
 	public void setApp(App app) {

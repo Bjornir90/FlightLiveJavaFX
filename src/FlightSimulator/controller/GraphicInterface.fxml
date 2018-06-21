@@ -18,7 +18,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FlightSimulator.controller.LoadingController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FlightSimulator.controller.LoadingController" fx:id="root">
    <children>
       <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="601.0" prefWidth="904.0">
          <children>
@@ -233,7 +234,7 @@
                 </Tab>
               </tabs>
             </TabPane>
-            <Pane fx:id="pane3D" prefHeight="340.0" prefWidth="585.0">
+            <Pane prefHeight="340.0" prefWidth="585.0" fx:id="pane3D" >
                <children>
                   <Separator layoutX="-3.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="3.0" />
                </children>
