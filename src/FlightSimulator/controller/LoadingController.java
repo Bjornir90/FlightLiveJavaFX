@@ -38,6 +38,20 @@ public class LoadingController {
 	TextField sizeField;
 	@FXML
 	ListView<String> flightsList;
+	@FXML
+	Label planeIdLabel;
+	@FXML
+	Label departureAirportLabel;
+	@FXML
+	Label arrivalAirportLabel;
+	@FXML
+	Label planeTypeLabel;
+	@FXML
+	Label militaryBoolLabel;
+	@FXML
+	Label planeSpeedLabel;
+	@FXML
+	Label planeHeightLabel;
 
 	@FXML
 	public void initialize() {
@@ -117,7 +131,7 @@ public class LoadingController {
 			departureCountry.setItems(observableListCountry);
 			arrivalCountry.setItems(observableListCountry);
 
-			InterfaceController interfaceController = new InterfaceController(departureCountry, arrivalCountry, departureCity, arrivalCity, departureAirport, arrivalAirport, sizeField, validateButton, settingsButton, flightsList);
+			InterfaceController interfaceController = new InterfaceController(departureCountry, arrivalCountry, departureCity, arrivalCity, departureAirport, arrivalAirport, sizeField, validateButton, settingsButton, flightsList, planeIdLabel, planeHeightLabel, planeSpeedLabel, planeTypeLabel, militaryBoolLabel, departureAirportLabel, arrivalAirportLabel);
 
 			DataModel dataModel = new DataModel(app.getAirports(), app.getCountries());
 

@@ -12,4 +12,20 @@ public class Plane {
 		this.id = id;
 		this.icaoCode = icaoCode;
 	}
+
+	public boolean isMilitary() {
+		return isMilitary;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getIcaoCode() {
+		return icaoCode;
+	}
 }
