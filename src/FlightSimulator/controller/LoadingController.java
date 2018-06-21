@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -52,6 +53,8 @@ public class LoadingController {
 	Label planeSpeedLabel;
 	@FXML
 	Label planeHeightLabel;
+	@FXML
+	Pane pane3D;
 
 	@FXML
 	public void initialize() {
